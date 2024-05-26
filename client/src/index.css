@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+.review_scrollbar::-webkit-scrollbar {
+  height: 10px;
+}
+.review_scrollbar::-webkit-scrollbar-thumb {
+  background-color: #a847b59f;
+  border: none;
+}
+.review_scrollbar::-webkit-scrollbar-thumb:hover{
+  background-color: #8e369a9f;
+  border: none;
+}
+.review_scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.text1_gradient {
+  background: linear-gradient(to right, #91bbf5, #cc886c);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.text2_gradient {
+  background: linear-gradient(to right, #fdf77d, #3d6dcb);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+::-webkit-scrollbar {
+  height: 7px;
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: grey;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.my-swiper .swiper-pagination-bullet {
+  width: 10px; 
+  height: 10px; 
+  background-color: #888;
+  opacity: 0.5; 
+  transition: width 0.3s ease;
+}
+
+.my-swiper .swiper-pagination-bullet-active {
+  width: 30px; 
+  height: 10px; 
+  background-color: #762f89c0;
+  border-radius: 8px;
+  opacity: 1;
+}
+.ql-size-extra-huge {
+  font-size: 60px; 
+}
+
