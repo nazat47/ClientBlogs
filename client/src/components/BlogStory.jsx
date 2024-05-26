@@ -5,6 +5,7 @@ import "react-quill/dist/quill.bubble.css";
 import { baseUrl } from "../utils/config";
 
 const BlogStory = ({ title, description, imageSrc }) => {
+  console.log(`${baseUrl}/${imageSrc}`)
   return (
     <div className="space-y-4">
       <p className="font-bold text-lg lg:text-2xl">{title}</p>
