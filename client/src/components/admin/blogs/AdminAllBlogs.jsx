@@ -125,7 +125,7 @@ const AdminAllBlogs = () => {
           <AdminTablesSkeleton />
         ) : (
           <div className="w-[100%] h-[75vh] sm:h-[80vh] pt-1 mt-2 bg-white">
-                 <DataGrid
+            <DataGrid
               columns={columns}
               rows={row}
               pageSize={10}

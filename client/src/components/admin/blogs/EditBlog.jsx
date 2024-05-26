@@ -9,6 +9,8 @@ import { toast } from "react-toastify";
 import TextEditor from "../../TextEditor";
 
 const EditBlog = ({ editOpen, setEditOpen, blog }) => {
+  console.log(blog)
+  console.log(`${baseUrl}/${blog?.imageUrl}`)
   const {
     register,
     handleSubmit,
