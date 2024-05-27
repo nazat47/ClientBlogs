@@ -3,11 +3,18 @@ import { IoShareSocialSharp } from "react-icons/io5";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
 import { baseUrl } from "../utils/config";
+import { useNavigate } from "react-router-dom";
 
-const BlogStory = ({ title, description, imageSrc }) => {
+const BlogStory = ({ title, description, imageSrc, id }) => {
+  const navigate = useNavigate();
   return (
     <div className="space-y-4">
-      <p className="font-bold text-lg lg:text-2xl">{title}</p>
+      <p
+        onClick={() => navigate(`/blog/${id}`)}
+        className=" cursor-pointer font-bold text-lg lg:text-2xl"
+      >
+        {title}
+      </p>
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-2 text-xs text-gray-600">
           <p>

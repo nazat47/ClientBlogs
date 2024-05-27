@@ -18,7 +18,9 @@ const Home = () => {
         const { data } = await axios.get(`${routeUrl}/blogs`, {
           withCredentials: true,
         });
+        console.log(data)
         return data;
+        
       } catch (error) {
         toast.error("Failed to load blogs, try again later");
       }
@@ -42,6 +44,7 @@ const Home = () => {
                   title={blogs[0]?.title}
                   description={blogs[0]?.text}
                   imageSrc={blogs[0]?.imageUrl}
+                  id={blogs[0]?._id}
                 />
                 <div className="w-full space-y-3">
                   <p className="font-bold">In this article</p>
@@ -166,6 +169,7 @@ const Home = () => {
                       title={blog?.title}
                       description={blog?.text}
                       imageSrc={blog?.imageUrl}
+                      id={blog?._id}
                     />
                   </div>
                 ))}

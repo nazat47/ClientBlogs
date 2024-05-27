@@ -16,6 +16,7 @@ import AdminProtected from "./protected/AdminProtected";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminBlogs from "./pages/admin/AdminBlogs";
 import AdminLogin from "./pages/admin/AdminLogin";
+import BlogDetails from "./pages/BlogDetails";
 
 function App() {
   return (
@@ -100,6 +101,14 @@ function App() {
             element={
               <Layout>
                 <Horoscope />
+              </Layout>
+            }
+          />
+          <Route
+            path="/blog/:id"
+            element={
+              <Layout>
+                <BlogDetails />
               </Layout>
             }
           />

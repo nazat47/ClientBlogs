@@ -5,8 +5,10 @@ import "react-quill/dist/quill.bubble.css";
 import axios from "axios";
 import { baseUrl, routeUrl } from "../utils/config";
 import BlogsSkeleton from "./skeletons/BlogsSkeleton";
+import { useNavigate } from "react-router-dom";
 
 const CategorizedBlogs = ({ category }) => {
+  const navigate = useNavigate();
   const { data: allBlogs, isLoading } = useQuery({
     queryKey: ["categorizedBlogs", category],
     queryFn: async () => {
@@ -28,7 +30,12 @@ const CategorizedBlogs = ({ category }) => {
           <div className="flex flex-col gap-14">
             {allBlogs?.map((blog, i) => (
               <div className="flex flex-col gap-4">
-                <h1 className="font-bold text-3xl">{blog?.title}</h1>
+                <h1
+                  onClick={() => navigate(`/blog/${blog?._id}`)}
+                  className="font-bold text-3xl cursor-pointer"
+                >
+                  {blog?.title}
+                </h1>
                 <img
                   src={`${baseUrl}/${blog?.imageUrl}`}
                   alt="blogImage"
