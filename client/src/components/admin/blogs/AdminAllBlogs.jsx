@@ -119,7 +119,7 @@ const AdminAllBlogs = () => {
           <h1 className="font-bold text-2xl">Blogs</h1>
           <button
             onClick={() => setAddOpen(true)}
-            className="flex gap-1 items-center justify-between p-2 px-6 text-white font-bold bg-black rounded hover:bg-purple-800"
+            className="flex gap-1 items-center justify-between p-2 px-6 text-white font-bold bg-stone-800 rounded hover:bg-black transition"
           >
             <MdAdd size={30} />
             <p>Add</p>
@@ -132,7 +132,7 @@ const AdminAllBlogs = () => {
             <DataGrid
               columns={columns}
               rows={row}
-              pageSize={10}
+              pageSize={7}
               rowHeight={70}
               disableSelectionOnClick
             />
