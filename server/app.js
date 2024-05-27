@@ -2,6 +2,7 @@ require("dotenv").config();
 require("express-async-errors");
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 const connectDB = require("./db/connect");
 const routeNotFound = require("./middlewares/routeNotFound");
 const errorHandler = require("./middlewares/errorHandler");
@@ -18,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["https://in-general-blogs.vercel.app"],
+    origin: ["http://localhost:3000", "https://ingeneral-blogs.vercel.app"],
     credentials: true,
   })
 );
@@ -38,7 +39,7 @@ app.set("trust proxy", 1);
 //   })
 // );
 
-app.use(express.static("uploads"));
+app.use(express.static(path.join(__dirname, "uploads")));
 app.get("/", (req, res) => {
   res.send("In General Backend");
 });
