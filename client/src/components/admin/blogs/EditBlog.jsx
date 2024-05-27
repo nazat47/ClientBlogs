@@ -4,7 +4,7 @@ import { RiImageAddFill } from "react-icons/ri";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { baseUrl, routeUrl } from "../../../utils/config";
+import { baseUrl, categories, routeUrl } from "../../../utils/config";
 import { toast } from "react-toastify";
 import TextEditor from "../../TextEditor";
 
@@ -13,10 +13,12 @@ const EditBlog = ({ editOpen, setEditOpen, blog }) => {
     register,
     handleSubmit,
     setValue,
+    getValues,
     formState: { errors, isSubmitting },
     reset: formReset,
   } = useForm();
   const [description, setDescription] = useState("");
+  const [tags, setTags] = useState([]);
   const [descErrorMsg, setDescErrorMsg] = useState(null);
   const [file, setFile] = useState(null);
   const queryClient = useQueryClient();
@@ -38,11 +40,20 @@ const EditBlog = ({ editOpen, setEditOpen, blog }) => {
     onSuccess: () => {
       reset();
       setEditOpen(false);
+      toast.success("Blog updated");
       queryClient.invalidateQueries({
         queryKey: ["blogs"],
       });
     },
   });
+
+  const addTags = () => {
+    const newTag = getValues("tag");
+    if (newTag && !tags.includes(newTag)) {
+      setTags((prev) => [...prev, newTag]);
+    }
+    setValue("tag", "");
+  };
 
   const onSubmit = (data) => {
     if (description.length === 0) {
@@ -52,6 +63,8 @@ const EditBlog = ({ editOpen, setEditOpen, blog }) => {
       forms.append("title", data?.title);
       forms.append("text", description);
       forms.append("subTitle", data?.subTitle);
+      forms.append("category", data?.category);
+      tags?.forEach((tag) => forms.append("tags[]", tag));
       if (file) forms.append("image", file);
       mutate(forms);
       setFile(null);
@@ -59,6 +72,13 @@ const EditBlog = ({ editOpen, setEditOpen, blog }) => {
       setDescription("");
     }
   };
+
+  const removeTag = (index) => {
+    const filteredTags = [...tags];
+    filteredTags.splice(index, 1);
+    setTags([...filteredTags]);
+  };
+
   const handleClose = () => {
     setEditOpen(false);
     setFile(null);
@@ -68,6 +88,8 @@ const EditBlog = ({ editOpen, setEditOpen, blog }) => {
   useEffect(() => {
     setValue("title", blog?.title);
     setValue("subTitle", blog?.subTitle);
+    setValue("category", blog?.category);
+    setTags(blog?.tags);
     setDescription(blog?.text);
     // eslint-disable-next-line
   }, [blog]);
@@ -116,32 +138,65 @@ const EditBlog = ({ editOpen, setEditOpen, blog }) => {
               {errors?.title && (
                 <p className="text-red-600">* {errors?.title?.message}</p>
               )}
-              <input
-                {...register("title", {
-                  required: "Blog title is required",
-                })}
-                type="text"
-                name="title"
-                placeholder="Title"
-                className="p-3 w-full rounded border border-gray-200 outline-purple-200"
-              />
+              <div className="space-y-2">
+                <label className="font-bold text-gray-600">Title</label>
+                <input
+                  {...register("title", {
+                    required: "Blog title is required",
+                  })}
+                  type="text"
+                  name="title"
+                  placeholder="Title"
+                  className="p-3 w-full rounded border border-gray-200 outline-purple-200"
+                />
+              </div>
               {errors?.subTitle && (
                 <p className="text-red-600">* {errors?.subTitle?.message}</p>
               )}
-              <input
-                {...register("subTitle", {
-                  required: "Short description is required",
-                })}
-                type="text"
-                name="subTitle"
-                placeholder="Short Description"
-                className="p-3 w-full rounded border border-gray-200 outline-purple-200"
-              />
+              <div className="space-y-2">
+                <label className="font-bold text-gray-600">
+                  Short description
+                </label>
+                <input
+                  {...register("subTitle", {
+                    required: "Short description is required",
+                  })}
+                  type="text"
+                  name="subTitle"
+                  placeholder="Short Description"
+                  className="p-3 w-full rounded border border-gray-200 outline-purple-200"
+                />
+              </div>
+              {errors?.category && (
+                <p className="text-red-600">* {errors?.category?.message}</p>
+              )}
+              <div className="space-y-2">
+                <label className="font-bold text-gray-600">Category</label>
+                <select
+                  {...register("category", {
+                    required: "Category is required",
+                  })}
+                  name="category"
+                  className="p-3 w-full rounded border border-gray-200 outline-purple-200"
+                >
+                  <option value="" disabled selected className="text-gray-400">
+                    Select Category
+                  </option>
+                  {categories.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+              </div>
               {descErrorMsg && <p className="text-red-600">{descErrorMsg}</p>}
-              <TextEditor
-                description={description}
-                setDescription={setDescription}
-              />
+              <div>
+                <label className="font-bold text-gray-600">Description</label>
+                <TextEditor
+                  description={description}
+                  setDescription={setDescription}
+                />
+              </div>
               <label
                 htmlFor="edit"
                 className="w-full h-[50px] bg-gray-200 rounded-lg p-3 cursor-pointer flex justify-between items-center"
@@ -157,6 +212,37 @@ const EditBlog = ({ editOpen, setEditOpen, blog }) => {
                 accept="images/*"
                 name="image"
               />
+              <div className="w-full flex gap-2">
+                <input
+                  {...register("tag")}
+                  type="text"
+                  name="tag"
+                  placeholder="Tags (Optional)"
+                  className="p-3 w-[80%] sm:w-[90%] rounded border border-gray-200 outline-purple-200"
+                />
+                <div
+                  onClick={addTags}
+                  className="w-[20%] sm:w-[10%] text-sm sm:text-md cursor-pointer p-2 flex items-center justify-center bg-white border border-slate-700 hover:bg-black hover:text-white font-bold transition rounded "
+                >
+                  Add
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {tags?.map((tag, i) => (
+                  <p
+                    key={i}
+                    className="p-2 bg-sky-200 border border-sky-600 rounded flex gap-3"
+                  >
+                    {tag}{" "}
+                    <span
+                      onClick={() => removeTag(i)}
+                      className="cursor-pointer"
+                    >
+                      x
+                    </span>
+                  </p>
+                ))}
+              </div>
               <button
                 disabled={isPending || isSubmitting}
                 type="submit"

@@ -6,6 +6,7 @@ const {
   getBlog,
   deleteBlog,
   uploadImage,
+  getBlogByCategory,
 } = require("../controllers/blogs");
 
 const uploadOptions = require("../utils/multerConfig");
@@ -21,6 +22,7 @@ router
   .put(uploadOptions.single("image"), authenticateUser, updateBlog)
   .get(getBlog)
   .delete(authenticateUser, deleteBlog);
+router.get("/get/:category", getBlogByCategory);
 router.post("/upload", uploadOptions.single("image"), uploadImage);
 
 module.exports = router;

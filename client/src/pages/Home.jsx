@@ -144,7 +144,7 @@ const Home = () => {
             </div>
           </section>
           <section className="w-full mt-12">
-            {blogs?.map((_, i) => (
+            {blogs?.map((blog, i) => (
               <div key={i}>
                 <div className="flex h-[1px] items-center justify-center border border-dashed border-gray-700 relative my-3">
                   <p className="text-[8px] font-bold absolute top-[-7px] bg-white w-[70px] text-center">
@@ -152,9 +152,9 @@ const Home = () => {
                   </p>
                 </div>
                 <BlogStory
-                  title={blogs[0]?.title}
-                  description={blogs[0]?.text}
-                  imageSrc={blogs[0]?.imageUrl}
+                  title={blog?.title}
+                  description={blog?.text}
+                  imageSrc={blog?.imageUrl}
                 />
               </div>
             ))}

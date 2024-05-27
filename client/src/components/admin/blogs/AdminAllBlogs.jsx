@@ -97,13 +97,17 @@ const AdminAllBlogs = () => {
       },
     },
   ];
+
   const row = [];
   data?.forEach((blog) => {
+    console.log(blog);
     row.push({
       id: blog?._id,
       title: blog?.title,
       subTitle: blog?.subTitle,
       text: blog?.text,
+      category: blog?.category,
+      tags: blog?.tags || [],
       imageUrl: blog?.imageUrl,
     });
   });

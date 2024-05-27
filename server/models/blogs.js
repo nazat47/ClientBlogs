@@ -16,6 +16,10 @@ const blogSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide blog text"],
     },
+    tags: {
+      type: [String],
+      default: [],
+    },
     imageUrl: {
       type: String,
       required: [true, "Please provide blog image"],

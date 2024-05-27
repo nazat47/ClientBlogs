@@ -4,7 +4,7 @@ const Blogs = require("../models/blogs");
 const path = require("path");
 
 const createBlog = async (req, res) => {
-  const { title, text, subTitle, category } = req.body;
+  const { title, text, subTitle, category, tags } = req.body;
   if (!title || !text || !subTitle || !category) {
     throw new BadRequest(
       "Plase insert blog title, sub title, description and category"
@@ -19,6 +19,7 @@ const createBlog = async (req, res) => {
       text,
       subTitle,
       category,
+      tags,
       imageUrl: req.file?.filename,
     });
     if (!blog) {
@@ -39,6 +40,17 @@ const getBlog = async (req, res) => {
     throw new NotFound("No blog found");
   }
   return res.status(200).json(blog);
+};
+const getBlogByCategory = async (req, res) => {
+  const { category } = req.params;
+  if (!category) {
+    throw new BadRequest("category not provided");
+  }
+  const blogs = await Blogs.find({ category });
+  if (!blogs) {
+    throw new NotFound("No blogs found");
+  }
+  return res.status(200).json(blogs);
 };
 const getAllBlogs = async (req, res) => {
   const blogs = await Blogs.find({}).sort({ createdAt: -1 });
@@ -67,7 +79,7 @@ const deleteBlog = async (req, res) => {
 
 const updateBlog = async (req, res) => {
   const { id } = req.params;
-  const { title, text, subTitle, category } = req.body;
+  const { title, text, subTitle, category, tags } = req.body;
   if (!title || !text || !subTitle || !category) {
     throw new BadRequest(
       "Plase insert blog title, sub title, description and category"
@@ -91,6 +103,7 @@ const updateBlog = async (req, res) => {
     blog.text = text;
     blog.subTitle = subTitle;
     blog.category = category;
+    blog.tags = tags;
     await blog.save();
     return res.status(201).json(blog);
   } catch (error) {
@@ -110,4 +123,5 @@ module.exports = {
   getAllBlogs,
   getBlog,
   uploadImage,
+  getBlogByCategory,
 };

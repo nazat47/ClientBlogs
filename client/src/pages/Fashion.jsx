@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import CategorizedBlogs from "../components/CategorizedBlogs";
 
 const Fashion = () => {
-  return (
-    <div>Fashion</div>
-  )
-}
+  return <CategorizedBlogs category={"fashion"} />;
+};
 
-export default Fashion
+export default Fashion;

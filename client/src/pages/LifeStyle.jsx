@@ -1,8 +1,9 @@
 import React from 'react'
+import CategorizedBlogs from '../components/CategorizedBlogs'
 
 const LifeStyle = () => {
   return (
-    <div>LifeStyle</div>
+     <CategorizedBlogs category={'lifestyle'} />
   )
 }
 

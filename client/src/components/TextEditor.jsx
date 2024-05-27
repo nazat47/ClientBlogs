@@ -86,7 +86,7 @@ const TextEditor = ({ description, setDescription }) => {
       formats={formats}
       theme="snow"
       placeholder="Description"
-      className="h-[400px] lg:h-[300px] mb-[120px] md:mb-[70px] xl:mb-12"
+      className="h-[400px] lg:h-[600px] mb-[120px] md:mb-[70px] xl:mb-12"
     />
   );
 };

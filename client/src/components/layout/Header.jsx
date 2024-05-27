@@ -23,8 +23,8 @@ const Header = () => {
   }, []);
   return (
     <>
-      <div className="h-[65px] md:h-[70px] lg:h-[80px] w-[95%] mx-auto bg-white py-1 px-8 border border-gray-300 shadow-lg flex items-end">
-        <div className="h-[50%] w-full flex items-center justify-between gap-2">
+      <div className="h-[50px] md:h-[70px] lg:h-[80px] w-[95%] mx-auto bg-white py-1 px-2 md:px-8 border border-gray-300 shadow-lg flex items-end">
+        <div className="h-full md:h-[50%] w-full flex items-center justify-between gap-2">
           <img
             src={
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsGJx2G9wkzu-hqzwk0c4TLb20IWeakPNxFqZVB4RweA&s"
@@ -74,14 +74,14 @@ const Header = () => {
               className="absolute top-0 left-0 cursor-pointer"
               onClick={() => setOpen(false)}
             />
-            <div className="flex flex-col gap-4 items-center justify-center font-semibold text-xl cursor-pointer mt-12">
+            <div className="flex flex-col gap-4 items-center justify-center font-semibold text-sm cursor-pointer mt-12">
               {navbarLinks?.map((link, i) => (
                 <Link
                   onClick={() => setOpen(false)}
                   key={i}
                   to={link.url}
-                  className={`${
-                    pathname === link?.name ? "text-[#7850F2]" : "text-black"
+                  className={`text-black ${
+                    pathname.toLowerCase() === link.url ? "underline" : ""
                   }`}
                 >
                   {link.name}

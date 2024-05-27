@@ -13,10 +13,13 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    getValues,
+    setValue,
     reset: formReset,
   } = useForm();
   const [description, setDescription] = useState("");
   const [file, setFile] = useState(null);
+  const [tags, setTags] = useState([]);
   const [fileErrorMsg, setFileErrorMsg] = useState(null);
   const [descErrorMsg, setDescErrorMsg] = useState(null);
   const queryClient = useQueryClient();
@@ -44,6 +47,15 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
       });
     },
   });
+
+  const addTags = () => {
+    const newTag = getValues("tag");
+    if (newTag && !tags.includes(newTag)) {
+      setTags((prev) => [...prev, newTag]);
+    }
+    setValue("tag", "");
+  };
+
   const onSubmit = (data) => {
     if (description.length === 0) {
       setDescErrorMsg("Description is required");
@@ -56,16 +68,29 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
       formsData.append("subTitle", data?.subTitle);
       formsData.append("category", data?.category);
       formsData.append("image", file);
+      tags?.forEach((tag) => formsData.append("tags[]", tag));
       mutate(formsData);
       setFile(null);
       formReset();
       setDescription("");
+      setTags([]);
     }
   };
+
+  const removeTag = (index) => {
+    const filteredTags = [...tags];
+    filteredTags.splice(index, 1);
+    setTags([...filteredTags]);
+  };
+
   const handleClose = () => {
     setAddOpen(false);
     setFile(null);
     formReset();
+    setDescription("");
+    setDescErrorMsg(null);
+    setFileErrorMsg(null);
+    setTags([]);
   };
   return (
     <div
@@ -168,7 +193,37 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
                 accept="images/*"
                 name="image"
               />
-
+              <div className="w-full flex gap-2">
+                <input
+                  {...register("tag")}
+                  type="text"
+                  name="tag"
+                  placeholder="Tags (Optional)"
+                  className="p-3 w-[90%] rounded border border-gray-200 outline-purple-200"
+                />
+                <div
+                  onClick={addTags}
+                  className="w-[10%] cursor-pointer p-2 flex items-center justify-center bg-white border border-slate-700 hover:bg-black hover:text-white font-bold transition rounded "
+                >
+                  Add
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {tags?.map((tag, i) => (
+                  <p
+                    key={i}
+                    className="p-2 bg-sky-200 border border-sky-600 rounded flex gap-3"
+                  >
+                    {tag}{" "}
+                    <span
+                      onClick={() => removeTag(i)}
+                      className="cursor-pointer"
+                    >
+                      x
+                    </span>
+                  </p>
+                ))}
+              </div>
               <button
                 disabled={isPending || isSubmitting}
                 type="submit"
@@ -176,7 +231,7 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
                   isPending || isSubmitting ? "cursor-not-allowed" : ""
                 }`}
               >
-                Add
+                Submit
               </button>
             </form>
           </div>

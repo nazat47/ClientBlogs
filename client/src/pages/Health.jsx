@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import CategorizedBlogs from "../components/CategorizedBlogs";
 
 const Health = () => {
-  return (
-    <div>Health</div>
-  )
-}
+  return <CategorizedBlogs category={"health"} />;
+};
 
-export default Health
+export default Health;
