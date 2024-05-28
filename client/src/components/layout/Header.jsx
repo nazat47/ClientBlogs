@@ -23,16 +23,10 @@ const Header = () => {
   }, []);
   return (
     <>
-      <div className="h-[50px] md:h-[70px] lg:h-[80px] w-[95%] mx-auto bg-white py-1 px-2 md:px-8 border border-gray-300 shadow-lg flex items-end">
-        <div className="h-full md:h-[50%] w-full flex items-center justify-between gap-2">
-          <img
-            src={
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsGJx2G9wkzu-hqzwk0c4TLb20IWeakPNxFqZVB4RweA&s"
-            }
-            alt="Logo"
-            className="h-full"
-          />
-          <div className="hidden sm:flex gap-4 lg:gap-6 items-center justify-center font-semibold text-[6px] md:text-[8px] lg:text-[10px] cursor-pointer">
+      <div className="h-[50px] md:h-[70px] lg:h-[80px] w-[95%] mx-auto bg-white md:pb-2 border border-gray-300 shadow-lg flex items-end justify-center">
+        <div className="h-full w-full sm:w-auto md:h-[50%] flex items-center justify-between gap-6 px-4 sm:px-0">
+          <img src={"/inGeneralLogo.png"} alt="Logo" className="h-[20px] md:h-[30px] w-[100px] md:w-[140px] " />
+          <div className="hidden sm:flex gap-4 lg:gap-5 items-center justify-center font-semibold text-[6px] md:text-[8px] lg:text-[10px] cursor-pointer">
             {navbarLinks?.map((link, i) => (
               <Link
                 key={i}

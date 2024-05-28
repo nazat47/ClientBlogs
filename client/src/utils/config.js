@@ -1,6 +1,6 @@
 export const navbarLinks = [
   {
-    name: "Home",
+    name: "HOME",
     url: "/",
   },
   {

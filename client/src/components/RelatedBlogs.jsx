@@ -27,22 +27,22 @@ const RelatedBlogs = ({ category }) => {
           <h1 className="font-bold text-left mb-6 mt-12 text-2xl">
             You May Also Like
           </h1>
-          <div className="w-full grid grid-cols-3 gap-10">
+          <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-2 md:gap-4 xl:gap-6">
             {relatedBlogs?.map((blog, i) => (
               <div
                 key={i}
                 onClick={() => navigate(`/blog/${blog?._id}`)}
-                className="cursor-pointer h-[250px] lg:min-h-[350px] flex flex-col gap-1 lg:gap-2 xl:gap-4 items-center justify-start text-left shadow-custom bg-white border border-dashed border-stone-400 p-2"
+                className="cursor-pointer h-[300px] sm:h-[250px] lg:min-h-[350px] flex flex-col gap-1 lg:gap-2 xl:gap-4 items-center justify-start text-left shadow-custom bg-white border border-dashed border-stone-400 p-2"
               >
                 <img
                   src={`${baseUrl}/${blog?.imageUrl}`}
                   alt="blog"
                   className="w-full h-[60%]"
                 />
-                <p className="w-full font-bold sm:text-[14px] md:text-[17px] lg:text-xl leading-5 mt-3 sm:mt-1 md:mt-2 lg:mt-3 lg:leading-[120%]">
+                <p className="w-full font-bold text-[13px] sm:text-[12px] md:text-[14px] lg:text-xl leading-4 sm:leading-[15px] md:leading-5 mt-1 md:mt-2 lg:mt-3 lg:leading-[120%]">
                   {blog?.title}
                 </p>
-                <p className="line-clamp-2 text-xs md:text-sm">
+                <p className="line-clamp-2 text-xs sm:text-[8px] md:text-xs leading-3">
                   {blog?.subTitle}
                 </p>
               </div>

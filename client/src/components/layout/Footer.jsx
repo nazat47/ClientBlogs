@@ -6,7 +6,11 @@ const Footer = () => {
     <div className="w-full h-auto flex items-center justify-center p-6 mt-[200px] bg-stone-200">
       <div className="w-full lg:w-[80%] flex flex-col md:flex-row p-2 sm:p-6 gap-20">
         <div className="w-full sm:w-[80%] md:w-[35%] mx-auto flex flex-col gap-3">
-          <h1 className="text-xl font-bold">THE INGENERAL</h1>
+          <img
+            src={"/inGeneralLogo.png"}
+            alt="Logo"
+            className="h-[60px] w-[220px]"
+          />
           <p className="text-sm">SUBSCIBE TO OUR NEWSLETTER</p>
           <div className="flex w-full">
             <input
