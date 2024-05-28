@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://ingeneral-blogs.vercel.app"],
+    origin: ["http://localhost:3000", "https://in-general-blogs.vercel.app"],
     credentials: true,
   })
 );

@@ -1,22 +1,24 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Home from "./pages/Home";
 import Layout from "./components/layout/Layout";
-import Entertainment from "./pages/Entertainment";
-import LifeStyle from "./pages/LifeStyle";
-import Sports from "./pages/Sports";
-import Korean from "./pages/Korean";
-import Select from "./pages/Select";
-import Fashion from "./pages/Fashion";
-import Health from "./pages/Health";
-import Horoscope from "./pages/Horoscope";
-import Beauty from "./pages/Beauty";
 import AdminProtected from "./protected/AdminProtected";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminBlogs from "./pages/admin/AdminBlogs";
 import AdminLogin from "./pages/admin/AdminLogin";
-import BlogDetails from "./pages/BlogDetails";
+import {
+  Beauty,
+  BlogDetails,
+  Entertainment,
+  Fashion,
+  Health,
+  Home,
+  Horoscope,
+  Korean,
+  LifeStyle,
+  Select,
+  Sports,
+} from "./pages";
 
 function App() {
   return (
@@ -112,14 +114,6 @@ function App() {
               </Layout>
             }
           />
-          {/* <Route
-            path="/blog/:id"
-            element={
-              <Layout>
-                <BlogDetails />
-              </Layout>
-            }
-          /> */}
           <Route
             path="/dashboard"
             element={
