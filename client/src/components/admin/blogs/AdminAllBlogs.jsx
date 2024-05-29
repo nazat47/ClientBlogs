@@ -100,7 +100,6 @@ const AdminAllBlogs = () => {
 
   const row = [];
   data?.forEach((blog) => {
-    console.log(blog);
     row.push({
       id: blog?._id,
       title: blog?.title,
