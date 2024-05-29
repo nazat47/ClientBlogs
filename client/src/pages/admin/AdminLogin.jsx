@@ -30,7 +30,8 @@ const AdminLogin = () => {
     if (isInGeneralAuthenticated) {
       navigate("/dashboard");
     }
-  }, []);
+    // eslint-disable-next-line
+  }, [isInGeneralAuthenticated]);
 
   return (
     <div className="h-screen w-screen bg-slate-200 flex items-center justify-center">
